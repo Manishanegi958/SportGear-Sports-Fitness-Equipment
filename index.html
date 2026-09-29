@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SportGear - Sports & Fitness Equipment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">SPORT<span>GEAR</span></a>
+    <button class="burger" id="burger" aria-label="Open menu">&#9776;</button>
+    <nav id="menu" class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#shop/footwear">Footwear</a>
+      <a href="#shop/apparel">Apparel</a>
+      <a href="#shop/gym">Gym Equipment</a>
+      <a href="#shop/team">Team Sports</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-tools">
+      <input id="navSearch" type="search" placeholder="Search gear..." aria-label="Search products">
+      <a href="#account" id="accLink">Account</a>
+      <a href="#cart" class="cart-link">Cart <span id="cartCount">0</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <section class="view" id="v-home">
+    <div class="hero">
+      <div class="container hero-in">
+        <h1>Train harder.<br>Play louder.</h1>
+        <p>Shoes, kits and gym gear for football, cricket, tennis, basketball and running. Free delivery over $100.</p>
+        <a class="btn" href="#shop">Shop all gear</a>
+        <a class="btn ghost" href="#shop/footwear">Browse footwear</a>
+      </div>
+    </div>
+    <div class="container">
+      <h2 class="title">Shop by category</h2>
+      <div class="cats" id="homeCats"></div>
+      <h2 class="title">Featured products</h2>
+      <div class="grid" id="featured"></div>
+      <div class="deal">
+        <div><h2>Weekend deal: 20% off footwear</h2><p>Use code <b>SPORT20</b> at checkout.</p></div>
+        <a class="btn" href="#shop/footwear">Grab the deal</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT LISTING -->
+  <section class="view" id="v-shop">
+    <div class="container">
+      <h2 class="title" id="shopTitle">All products</h2>
+      <div class="shop-layout">
+        <aside class="filters">
+          <label>Search<input id="fSearch" type="search" placeholder="Name or brand"></label>
+          <label>Category
+            <select id="fCat"><option value="all">All</option><option value="footwear">Footwear</option><option value="apparel">Apparel</option><option value="gym">Gym Equipment</option><option value="team">Team Sports &amp; Accessories</option></select>
+          </label>
+          <label>Sport<select id="fSport"></select></label>
+          <label>Brand<select id="fBrand"></select></label>
+          <label>Size<select id="fSize"><option value="all">Any</option></select></label>
+          <label>Max price: $<span id="fPriceVal">300</span><input id="fPrice" type="range" min="10" max="300" value="300"></label>
+          <label>Sort by
+            <select id="fSort"><option value="">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="rating">Top rated</option></select>
+          </label>
+          <button class="btn small" id="fReset">Clear filters</button>
+        </aside>
+        <div>
+          <p id="resultCount" class="muted"></p>
+          <div class="grid" id="shopGrid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT DETAIL -->
+  <section class="view" id="v-product"><div class="container" id="productBox"></div></section>
+
+  <!-- CART -->
+  <section class="view" id="v-cart">
+    <div class="container"><h2 class="title">Your cart</h2><div id="cartBox"></div></div>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section class="view" id="v-checkout">
+    <div class="container">
+      <h2 class="title">Checkout</h2>
+      <div class="two-col" id="checkoutBox">
+        <form id="checkoutForm" class="card form">
+          <h3>Shipping address</h3>
+          <input name="name" placeholder="Full name" required>
+          <input name="phone" placeholder="Phone" required pattern="[0-9+ -]{8,15}">
+          <input name="address" placeholder="Street address" required>
+          <div class="row"><input name="city" placeholder="City" required><input name="zip" placeholder="PIN / ZIP" required></div>
+          <h3>Payment method</h3>
+          <label class="radio"><input type="radio" name="pay" value="Card" checked> Credit / debit card</label>
+          <label class="radio"><input type="radio" name="pay" value="UPI"> UPI</label>
+          <label class="radio"><input type="radio" name="pay" value="Cash on delivery"> Cash on delivery</label>
+          <div id="cardFields">
+            <input name="card" placeholder="Card number (demo: any 16 digits)" pattern="[0-9 ]{16,19}">
+            <div class="row"><input name="exp" placeholder="MM/YY"><input name="cvv" placeholder="CVV" maxlength="4"></div>
+          </div>
+          <button class="btn" type="submit">Place order</button>
+          <p class="muted">Payment is simulated. No real charges are made.</p>
+        </form>
+        <div class="card" id="orderSummary"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCOUNT -->
+  <section class="view" id="v-account"><div class="container" id="accountBox"></div></section>
+
+  <!-- LOGIN / REGISTER -->
+  <section class="view" id="v-login">
+    <div class="container narrow">
+      <div class="tabs"><button class="tab active" data-tab="login">Login</button><button class="tab" data-tab="register">Register</button></div>
+      <form id="loginForm" class="card form">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password (min 6 characters)" minlength="6" required>
+        <button class="btn" type="submit">Login</button>
+      </form>
+      <form id="registerForm" class="card form" hidden>
+        <input name="name" placeholder="Full name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password (min 6 characters)" minlength="6" required>
+        <button class="btn" type="submit">Create account</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="view" id="v-about">
+    <div class="container narrow">
+      <h2 class="title">About SportGear</h2>
+      <p>SportGear started in 2018 when three friends who played weekend football grew tired of gear that wore out before the season did. We now supply runners, lifters and club teams across India.</p>
+      <h3>Our mission</h3>
+      <p>Put durable, fairly priced equipment in the hands of anyone who wants to move more.</p>
+      <h3>The team</h3>
+      <div class="team">
+        <div class="card"><b>Arjun Mehta</b><br>Founder, ex-club footballer</div>
+        <div class="card"><b>Priya Nair</b><br>Head of product, marathon runner</div>
+        <div class="card"><b>Rahul Verma</b><br>Operations and delivery</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="view" id="v-contact">
+    <div class="container two-col">
+      <div>
+        <h2 class="title">Contact us</h2>
+        <p><b>Store:</b> 12 Stadium Road, Chennai, Tamil Nadu</p>
+        <p><b>Phone:</b> +91 90000 00000</p>
+        <p><b>Email:</b> support@sportgear.example</p>
+        <p class="muted">Open Mon-Sat, 9am to 8pm.</p>
+      </div>
+      <form id="contactForm" class="card form">
+        <input name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="msg" rows="5" placeholder="How can we help?" required></textarea>
+        <button class="btn" type="submit">Send message</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container"><b>SPORTGEAR</b> &copy; 2026. Frontend demo project. All data is stored in your browser.</div>
+</footer>
+<div id="toast" class="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
